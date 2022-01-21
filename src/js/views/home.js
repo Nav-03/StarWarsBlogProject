@@ -6,18 +6,10 @@ import Card from "../component/Card.js";
 
 export const Home = () => (
 	<>
-	<div className="horizontalScroll my-4" >
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-
-	</div>
-	
-	<div className="horizontalScroll my-4">
+		<p className="font-weight-bold display-4 ">Characters</p>
+		<div className="horizontalScroll my-4">
+			<Card />
+			<Card />
 			<Card />
 			<Card />
 			<Card />
@@ -25,8 +17,22 @@ export const Home = () => (
 			<Card />
 			<Card />
 
-	</div>
-		</>
-	
-	
+		</div>
+
+
+		<p className="font-weight-bold display-4 text-left">Planets</p>
+		<div className="horizontalScroll my-4">
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+
+		</div>
+	</>
+
+
 );
