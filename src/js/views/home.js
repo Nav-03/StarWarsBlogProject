@@ -4,18 +4,12 @@ import "../../styles/home.css";
 import Card from "../component/Card.js";
 
 
-export const Home = () => (
+export const Home = (props) => (
 	<>
 		<p className="font-weight-bold display-4 ">Characters</p>
 		<div className="horizontalScroll my-4">
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
+			{props.characters.map((c)=><Card isFavorite={props.favorites.find(fav => fav.name === c.name)}/>)}
+		
 
 		</div>
 
@@ -23,13 +17,8 @@ export const Home = () => (
 		<p className="font-weight-bold display-4 text-left">Planets</p>
 		<div className="horizontalScroll my-4">
 			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
+	
+	
 
 		</div>
 	</>
