@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Navbar = (props) => {
-
+export const Navbar = () => {
+	const {store, actions} = useContext(Context);
 
 
 
@@ -13,7 +13,7 @@ export const Navbar = (props) => {
 			</Link>
 			<div className="dropdown">
   <button className="btn btn-primary dropdown-toggle mx-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Favorites {props.favorites.length}
+    Favorites {store.favorites.length}
   </button>
   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     {props.favorites.map(f=><li><a className="dropdown-item" href="#">{f.name}</a><i  onClick={()=>props.deleteFavorite(f)} className="fas fa-trash"></i></li>)}

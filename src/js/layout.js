@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
-import { Demo } from "./views/demo";
+import { Demo } from "./views/CharacterDetails";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
@@ -16,12 +16,12 @@ const Layout = () => {
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
 	const [favorites, setFavorites] = useState([
-		{name:"Luke Skywalker"},
-		{name:"r2d2"}
+		{ name: "Luke Skywalker" },
+		{ name: "r2d2" }
 	]);
 	const [characters, setCharacters] = useState([
-		{name:"Luke Skywalker"},
-		{name:"r2d2"}
+		{ name: "Luke Skywalker" },
+		{ name: "r2d2" }
 	]);
 
 
@@ -31,13 +31,15 @@ const Layout = () => {
 		<div>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					<Navbar favorites={favorites} deleteFavorite={(fav)=> setFavorites(favorites.filter(f=> f.name != fav.name))}/>
+					<Navbar favorites={favorites}
+						deleteFavorite={(fav) => setFavorites(favorites.filter(f => f.name !== fav.name))} />
 					<Switch>
 						<Route exact path="/">
-							<Home favorites={favorites} characters={characters}/>
+							<Home favorites={favorites}
+								characters={characters} />
 						</Route>
-						<Route exact path="/demo">
-							<Demo />
+						<Route exact path="/CharacterDetails">
+							<characters favorites={favorites}/>
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />

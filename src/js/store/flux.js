@@ -1,18 +1,33 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
+			favorites: [
 				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
+					name: "Luke Skywalker",
+
 				},
+
+			],
+			characters: [
 				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
+					name: "Luke Skywalker",
+					height: "172",
+					skin_color: "fair",
+					eye_color: "blue",
+					birth_year: "19BBY",
+					gender: "male",
 				}
-			]
+			],
+			planets: [
+				{
+					name: "Tatooine",
+					rotation_period: "23",
+					orbital_period: "304",
+					diameter: "10465",
+					climate: "arid",
+					population: "200000",
+				}
+			],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -28,15 +43,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//get the store
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			addFavorites: () => {
+				const store = getStore();
+				
+
 			}
 		}
 	};
