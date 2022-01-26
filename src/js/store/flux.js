@@ -47,11 +47,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			addFavorites: () => {
-				const store = getStore();
+			addFavorites: (text) => {
+				const newFavorite = [...favorites, { text }];
+				setFavorites(newFavorite);
 				
-
-			}
+			},
+			deleteFavorite: (indexToDelete) =>
+			setFavorites(
+			favorites.filter((item, currentIndex) => currentIndex !== indexToDelete)
+		),
 		}
 	};
 };
