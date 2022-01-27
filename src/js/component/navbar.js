@@ -26,15 +26,9 @@ export const Navbar = (props) => {
                 >
                     {store.favorites.map((f) => (
                         <li>
-<<<<<<< HEAD
                             <Link className="dropdown-item" to={f.type+ "/" + f.uid}>
                                 {f.name}
                             </Link>
-=======
-                            <a className="dropdown-item" href="#">
-                                {f.name}
-                            </a>
->>>>>>> a5108cc826a51128b1cf78ebac3de9e93cf9f97a
                             <i
                                 onClick={() => actions.deleteFavorite(f)}
                                 className="fas fa-trash"

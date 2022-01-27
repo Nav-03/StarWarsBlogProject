@@ -21,11 +21,7 @@ const Card = (props) => {
         <Link to={`${entity.type}/${entity.uid}`}>
           <a href="#" className="btn btn-primary ">Learn More!</a>
          </Link>
-<<<<<<< HEAD
           <button className={buttonClass} onClick={()=>props.isFavorite?actions.deleteFavorite(entity):actions.addFavorites(entity)}>            
-=======
-          <button className={buttonClass} onClick={()=> actions.addFavorites(entity)}>            
->>>>>>> a5108cc826a51128b1cf78ebac3de9e93cf9f97a
             <i className="fas fa-heart "></i>
           </button>
           
