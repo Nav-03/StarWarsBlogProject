@@ -1,13 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			favorites: [
-				{
-					name: "Luke Skywalker",
-
-				},
-
-			],
+			favorites: [],
 			characters: [
 				{
 					name: "Luke Skywalker",
@@ -26,36 +20,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 					diameter: "10465",
 					climate: "arid",
 					population: "200000",
+				},
+				{
+					name: "Tatooine 2",
+					rotation_period: "23",
+					orbital_period: "304",
+					diameter: "10465",
+					climate: "arid",
+					population: "200000",
 				}
 			],
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			loadPlanets: async () => {
+
+				const response = await fetch('https://www.swapi.tech/api/planets');
+				if(response.status === 200){
+					const payload = await response.json();
+					const myModifiedPlanets = payload.results.map(p => {
+						p.type = "planet";
+						return p;
+					})
+					setStore({ planets: myModifiedPlanets });
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
+			addFavorites: (entity) => {
 				const store = getStore();
-
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
-			addFavorites: (text) => {
-				const newFavorite = [...favorites, { text }];
-				setFavorites(newFavorite);
+				const newFavorite = [ ...store.favorites, entity ];
+				setStore({ favorites: newFavorite });
 				
 			},
-			deleteFavorite: (indexToDelete) =>
-			setFavorites(
-			favorites.filter((item, currentIndex) => currentIndex !== indexToDelete)
-		),
+			deleteFavorite: (favorite) => {
+				const store = getStore();
+				console.log("this is what I pretend to delete", favorite);
+				setStore({
+					favorites: store.favorites.filter(item => favorite.name !== item.name)
+				})
+				console.log("finish deleting the favorite");
+
+			}
 		}
 	};
 };
