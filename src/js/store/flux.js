@@ -1,63 +1,54 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {
-			favorites: [
-				{
-					name: "Luke Skywalker",
-
-				},
-
-			],
-			characters: [
-				{
-					name: "Luke Skywalker",
-					height: "172",
-					skin_color: "fair",
-					eye_color: "blue",
-					birth_year: "19BBY",
-					gender: "male",
-				}
-			],
-			planets: [
-				{
-					name: "Tatooine",
-					rotation_period: "23",
-					orbital_period: "304",
-					diameter: "10465",
-					climate: "arid",
-					population: "200000",
-				}
-			],
+	  store: {
+		favorites: [],
+		characters: [],
+		planets: [],
+		images: {
+			"planet1":"https://upload.wikimedia.org/wikipedia/en/6/6d/Tatooine_%28fictional_desert_planet%29.jpg"
 		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
-			addFavorites: (text) => {
-				const newFavorite = [...favorites, { text }];
-				setFavorites(newFavorite);
-				
-			},
-			deleteFavorite: (indexToDelete) =>
-			setFavorites(
-			favorites.filter((item, currentIndex) => currentIndex !== indexToDelete)
-		),
-		}
+	  },
+	  actions: {
+		loadPlanets: async () => {
+		  const response = await fetch("https://www.swapi.tech/api/planets");
+		  if (response.status === 200) {
+			const payload = await response.json();
+			const myModifiedPlanets = payload.results.map((p) => {
+			  p.type = "planet";
+			  return p;
+			});
+			setStore({ planets: myModifiedPlanets });
+		  }
+		},
+		loadCharacters: async () => {
+		  const response = await fetch("https://www.swapi.tech/api/people");
+		  if (response.status === 200) {
+			const payload = await response.json();
+			const myModifiedCharacters = payload.results.map((c) => {
+			  c.type = "people";
+			  return c;
+			});
+			setStore({ characters: myModifiedCharacters });
+		  }
+		},
+		addFavorites: (entity) => {
+		  const store = getStore();
+		  const newFavorite = [...store.favorites, entity];
+		  setStore({ favorites: newFavorite });
+		},
+		deleteFavorite: (favorite) => {
+		  const store = getStore();
+		  console.log("this is what I pretend to delete", favorite);
+		  setStore({
+			favorites: store.favorites.filter(
+			  (item) => favorite.name !== item.name
+			),
+		  });
+		  console.log("finish deleting the favorite");
+		},
+	  },
 	};
-};
-
-export default getState;
+  };
+  
+  export default getState;
+  

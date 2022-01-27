@@ -5,13 +5,14 @@ import { Context } from "../store/appContext";
 import "../../styles/demo.css";
 
 
- const CharacterDetails = () => {
+ const PlanetDetails = () => {
 	const { store, actions } = useContext(Context);
   const params = useParams();
 
-  console.log("I need to render the planet ", params.char_id)
-  const myCharacter = store.characters.find(c => c.uid === params.char_id)
-  if(myCharacter === null || myCharacter === undefined) {
+  console.log("I need to render the planet ", params.planet_id)
+  console.log("this is the store",store.planets)
+  const myPlanet = store.planets.find(p => p.uid === params.planet_id)
+  if(myPlanet === null || myPlanet === undefined) {
     return <img className="fixed mx-auto" src="https://media0.giphy.com/media/hL9q5k9dk9l0wGd4e0/giphy.gif?cid=ecf05e47r4ep5pv335o8gr49buhwlwyka7f9xfiry4djfaja&rid=giphy.gif&ct=g" />
   }
 	return (
@@ -22,7 +23,7 @@ import "../../styles/demo.css";
     </div>
     <div className="col-md-8 text-center">
       <div className="card-body px-5">
-        <h5 className="card-title">{myCharacter.name}</h5>
+        <h5 className="card-title">{myPlanet.name}</h5>
         <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
       </div>
@@ -32,7 +33,7 @@ import "../../styles/demo.css";
 	);
 };
 
-export default CharacterDetails;
+export default PlanetDetails;
 
 
 
