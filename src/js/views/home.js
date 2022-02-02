@@ -6,7 +6,7 @@ import { Context } from "../store/appContext";
 
 export const Home = (props) => {
 	const { store, actions} = useContext(Context);
-	console.log("these are the favorites", store.favorites)
+	console.log("these are the favorites", store)
 	return <>
 		<p className="font-weight-bold display-4 ">Characters</p>
 		<div className="horizontalScroll my-4">

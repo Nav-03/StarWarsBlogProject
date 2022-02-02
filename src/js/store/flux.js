@@ -13,10 +13,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 		  const response = await fetch("https://www.swapi.tech/api/planets");
 		  if (response.status === 200) {
 			const payload = await response.json();
-			const myModifiedPlanets = payload.results.map((p) => {
-			  p.type = "planet";
-			  return p;
-			});
+			const myModifiedPlanets = await Promise.all (payload.results.map(async(p) => {
+			  const planetDetails = await fetch(p.url);
+			  if (planetDetails.status === 200) {
+				  
+				  const pDetailsPayload = await planetDetails.json();
+				  let planet = pDetailsPayload.result.properties
+				  planet.type = "planets"
+				  console.log(planet)
+				  return planet;}
+			
+			}));
 			setStore({ planets: myModifiedPlanets });
 		  }
 		},
@@ -24,10 +31,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 		  const response = await fetch("https://www.swapi.tech/api/people");
 		  if (response.status === 200) {
 			const payload = await response.json();
-			const myModifiedCharacters = payload.results.map((c) => {
-			  c.type = "people";
-			  return c;
-			});
+			const myModifiedCharacters = await Promise.all (payload.results.map(async(c) => {
+				const charDetails = await fetch(c.url);
+			  if (charDetails.status === 200) {
+			  
+				  const cDetailsPayload = await charDetails.json();
+				  let char = cDetailsPayload.result.properties
+			  char.type = "people";
+			  return char;}
+			}));
 			setStore({ characters: myModifiedCharacters });
 		  }
 		},
@@ -45,6 +57,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			),
 		  });
 		  console.log("finish deleting the favorite");
+		
 		},
 	  },
 	};
